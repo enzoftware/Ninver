@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/enzoftware/Ninver/issues"
   },
-  "homepage": "https://github.com/enzoftware/Ninver#readme"
+  "homepage": "https://github.com/enzoftware/Ninver#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
 }
