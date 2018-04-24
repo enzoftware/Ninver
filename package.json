@@ -1,0 +1,22 @@
+{
+  "name": "ninver",
+  "version": "1.0.0",
+  "description": "ninver",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enzoftware/Ninver.git"
+  },
+  "author": "xd",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enzoftware/Ninver/issues"
+  },
+  "homepage": "https://github.com/enzoftware/Ninver#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
