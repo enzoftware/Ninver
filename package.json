@@ -1,0 +1,19 @@
+{
+  "name": "ninverweb",
+  "version": "1.0.0",
+  "description": "Web version of ninver app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enzoftware/Ninver.git"
+  },
+  "author": "ninver",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enzoftware/Ninver/issues"
+  },
+  "homepage": "https://github.com/enzoftware/Ninver#readme"
+}
