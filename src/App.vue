@@ -1,21 +1,65 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <div class="container">
+      <h1>{{msg}}</h1>
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Email</label>
+            <input v-model="email" type="email" class="form-control" id="inputEmail4" placeholder="empresa@email.com">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Password</label>
+            <input v-model="password" type="password" class="form-control" id="inputPassword4" placeholder="xxxxxxxxx">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-8">
+            <label for="inputRazonSocial">Razon social</label>
+            <input v-model="razonSocial" type="text" class="form-control" id="inputRazonSocial" placeholder="Crehana">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputTipoEmpresa">Tipo de empresa</label>
+            <select v-model="tipoEmpresa" id="inputTipoEmpresa" class="form-control">
+              <option>Tecnologia</option>
+              <option>Educacion</option>
+              <option>Salud</option>
+              <option>Medio Ambiente</option>
+              <option>Finanzas</option>
+              <option>Otros</option>
+            </select>
+        
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputRUC">RUC</label>
+          <input v-model="ruc" type="text" class="form-control" id="inputRUC" placeholder="1234567890">
+        </div>
+        <div class="form-group">
+          <label for="inputAddress">Direccion</label>
+          <input v-model="direccion" type="text" class="form-control" id="inputAddress" placeholder="Av. Primavera 2305, 501">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputCity">Ciudad</label>
+            <input v-model="ciudad" type="text" class="form-control" id="inputCity" placeholder="Lima">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="inputContacto">Numero de contacto</label>
+            <input v-model="numeroContacto" type="text" class="form-control" id="inputContacto" placeholder="999999999">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">
+              Acepto los terminos y condiciones
+            </label>
+          </div>
+        </div>
+        <button @click="EnviarDatos()" class="btn btn-primary">Registrar</button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -24,37 +68,25 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Ninver',
+      email: '',
+      password: '',
+      razonSocial: '',
+      tipoEmpresa: '',
+      ruc: '',
+      direccion: '',
+      ciudad: '',
+      numeroContacto: ''
+    }
+  },
+  methods:{
+    EnviarDatos(){
+      alert( this.email + " " + this.direccion);
     }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
 </style>
