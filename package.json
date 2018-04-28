@@ -13,6 +13,7 @@
     "firebase": "^4.13.1",
     "vue": "^2.5.11",
     "vue-fire": "^0.1.0",
+    "vue-router": "^3.0.1",
     "vuefire": "^1.4.5"
   },
   "browserslist": [

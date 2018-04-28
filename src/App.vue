@@ -49,6 +49,20 @@
             <input v-model="numeroContacto" type="text" class="form-control" id="inputContacto" placeholder="999999999">
           </div>
         </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="inputMonto">Monto (S/.)</label>
+            <input v-model="monto" type="number" class="form-control" id="inputMonto" placeholder="120">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputInteres">Interes(%)</label>
+            <input v-model="interes" type="text" class="form-control" id="inputInteres" placeholder="10.3">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputCuotas">Cuotas (mensuales)</label>
+            <input v-model="numeroCuotas" type="text" class="form-control" id="inputCuotas" placeholder="100">
+          </div>
+        </div>
         <div class="form-group">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="gridCheck">
@@ -64,6 +78,9 @@
 </template>
 
 <script>
+
+import {proyectsRef} from './firebase'
+
 export default {
   name: 'app',
   data () {
@@ -76,12 +93,27 @@ export default {
       ruc: '',
       direccion: '',
       ciudad: '',
-      numeroContacto: ''
+      numeroContacto: '',
+      monto : '',
+      interes: '',
+      numeroCuotas: ''
     }
   },
   methods:{
     EnviarDatos(){
-      alert( this.email + " " + this.direccion);
+      proyectsRef.push({
+        correo: this.email,
+        contrasena: this.password,
+        razonSocial: this.razonSocial,
+        tipoEmpresa: this.tipoEmpresa,
+        RUC: this.ruc,
+        direcccion: this.direccion,
+        ciudad: this.ciudad,
+        numeroContacto: this.numeroContacto,
+        monto: this.monto,
+        interes: this.interes,
+        numeroCuotas: this.numeroCuotas
+      });
     }
   }
 }
