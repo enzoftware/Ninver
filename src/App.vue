@@ -1,7 +1,11 @@
 <template>
   <div id="app">
+
     <div class="container">
+
       <h1>{{msg}}</h1>
+
+
       <form>
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -71,8 +75,43 @@
             </label>
           </div>
         </div>
-        <button @click="EnviarDatos()" class="btn btn-primary">Registrar</button>
+        <a class="btn btn-primary disabled" @click="EnviarDatos()">Registrar</a>
+        <a @click="mostrarDatos()" class="btn btn-success disabled">Visualizar</a>
       </form>
+
+      <div v-show="visible"> 
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </div>
 </template>
@@ -96,7 +135,8 @@ export default {
       numeroContacto: '',
       monto : '',
       interes: '',
-      numeroCuotas: ''
+      numeroCuotas: '',
+      visible: 'false'
     }
   },
   methods:{
@@ -114,11 +154,20 @@ export default {
         interes: this.interes,
         numeroCuotas: this.numeroCuotas
       });
+    },
+    mostrarDatos(){
+      this.visible = !this.visible;
+      proyectsRef.on('value',function(snapshot){
+        snapshot.forEach(function(childSnapshot){
+          console.log(childSnapshot.val());
+        });
+      });
     }
   }
 }
 </script>
 
 <style>
+
 
 </style>
