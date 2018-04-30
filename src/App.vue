@@ -3,7 +3,7 @@
 
     <div class="container">
 
-      <h1>{{msg}}</h1>
+      <h1>{{name}}</h1>
 
 
       <form>
@@ -69,18 +69,18 @@
         </div>
         <div class="form-group">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <input class="form-check-input" type="checkbox" id="gridCheck" @click="EnabledButtons()">
             <label class="form-check-label" for="gridCheck">
               Acepto los terminos y condiciones
             </label>
           </div>
         </div>
-        <a class="btn btn-primary disabled" @click="EnviarDatos()">Registrar</a>
-        <a @click="mostrarDatos()" class="btn btn-success disabled">Visualizar</a>
+        <a class="btn btn-primary disabled" @click="EnviarDatos()" id="sendButton" >Registrar</a>
+        <a class="btn btn-success disabled" @click="mostrarDatos()" id="visibleButton">Visualizar</a>
       </form>
 
-      <div v-show="visible"> 
-        <table class="table">
+      <div v-show="visible == true"> 
+        <table class="table table-hover">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -119,12 +119,14 @@
 <script>
 
 import {proyectsRef} from './firebase'
+import swal from 'sweetalert2'
+
 
 export default {
   name: 'app',
   data () {
     return {
-      msg: 'Ninver',
+      name: 'Ninver',
       email: '',
       password: '',
       razonSocial: '',
@@ -141,33 +143,57 @@ export default {
   },
   methods:{
     EnviarDatos(){
-      proyectsRef.push({
-        correo: this.email,
-        contrasena: this.password,
-        razonSocial: this.razonSocial,
-        tipoEmpresa: this.tipoEmpresa,
-        RUC: this.ruc,
-        direcccion: this.direccion,
-        ciudad: this.ciudad,
-        numeroContacto: this.numeroContacto,
-        monto: this.monto,
-        interes: this.interes,
-        numeroCuotas: this.numeroCuotas
-      });
+      if(this.email !== "" && this.password !== "" && this.razonSocial!== "" && this.tipoEmpresa !== "" && this.ruc !== "" &&
+        this.direccion !== "" && this.ciudad !== "" && this.numeroContacto !== "" && this.monto !== "" && this.interes !== "" &&
+        this.numeroCuotas !== ""){
+          proyectsRef.push({
+            correo: this.email,
+            contrasena: this.password,
+            razonSocial: this.razonSocial,
+            tipoEmpresa: this.tipoEmpresa,
+            RUC: this.ruc,
+            direcccion: this.direccion,
+            ciudad: this.ciudad,
+            numeroContacto: this.numeroContacto,
+            monto: this.monto,
+            interes: this.interes,
+            numeroCuotas: this.numeroCuotas
+          });
+          $("#visibleButton").removeClass('disabled');
+          swal({
+            title: 'Success!',
+            text: 'Registro exitoso!',
+            type: 'success',
+            confirmButtonText: 'Ok'
+          });  
+        }else{
+          swal({
+            title: 'Error!',
+            text: 'No has completado los campos!',
+            type: 'error',
+            confirmButtonText: 'Ok'
+          });
+        }
     },
     mostrarDatos(){
-      this.visible = !this.visible;
+      this.visible = true;
       proyectsRef.on('value',function(snapshot){
         snapshot.forEach(function(childSnapshot){
           console.log(childSnapshot.val());
         });
       });
+    },
+    EnabledButtons(){
+      $("#sendButton").removeClass('disabled');
     }
   }
 }
 </script>
 
 <style>
-
+h1{
+  text-align: center;
+  margin: 2%;
+}
 
 </style>
