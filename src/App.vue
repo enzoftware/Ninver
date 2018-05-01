@@ -1,10 +1,8 @@
 <template>
   <div id="app">
 
-    <div class="container">
-
+    <div class="container">   
       <h1>{{name}}</h1>
-
 
       <form>
         <div class="form-row">
@@ -60,11 +58,11 @@
           </div>
           <div class="form-group col-md-4">
             <label for="inputInteres">Interes(%)</label>
-            <input v-model="interes" type="text" class="form-control" id="inputInteres" placeholder="10.3">
+            <input v-model="interes" type="number" class="form-control" id="inputInteres" placeholder="10.3">
           </div>
           <div class="form-group col-md-4">
             <label for="inputCuotas">Cuotas (mensuales)</label>
-            <input v-model="numeroCuotas" type="text" class="form-control" id="inputCuotas" placeholder="100">
+            <input v-model="numeroCuotas" type="number" class="form-control" id="inputCuotas" placeholder="100">
           </div>
         </div>
         <div class="form-group">
@@ -83,30 +81,22 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col"># Mes</th>
+              <th scope="col">Saldo Inicial</th>
+              <th scope="col">Interes</th>
+              <th scope="col">Amortizacion</th>
+              <th scope="col">Cuota Mensual</th>
+              <th scope="col">Saldo Final</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
+            <tr v-for="r in this.ppagos">
+              <th scope="row">{{r.mes}}</th>
+              <td>{{r.saldoInicial}}</td>
+              <td>{{r.intereses}}</td>
+              <td>{{r.amortizacion}}</td>
+              <td>{{r.cmensual}}</td>
+              <td>{{r.sfinal}}</td>
             </tr>
           </tbody>
         </table>
@@ -120,6 +110,22 @@
 
 import {proyectsRef} from './firebase'
 import swal from 'sweetalert2'
+
+function getValorCuota(monto, tasa, cuotas){
+      /* 
+        Retorna el valor actual de la cuota, según el 
+        método francés en donde las cuotas son fijas.
+                    
+        Formula = R = P [(i (1 + i)**n) / ((1 + i)**n – 1)]. 
+        Donde: 
+            R = renta (cuota)
+            P = principal (préstamo adquirido)
+            i = tasa de interés
+            n = número de periodos
+      */
+      tasa = tasa / 100;
+      return monto * ( (tasa * ( Math.pow(1+tasa,cuotas) ) ) / ((Math.pow(1+tasa,cuotas)) - 1) ) 
+  }
 
 
 export default {
@@ -138,7 +144,8 @@ export default {
       monto : '',
       interes: '',
       numeroCuotas: '',
-      visible: 'false'
+      visible: 'false',
+      ppagos: []
     }
   },
   methods:{
@@ -177,11 +184,19 @@ export default {
     },
     mostrarDatos(){
       this.visible = true;
-      proyectsRef.on('value',function(snapshot){
-        snapshot.forEach(function(childSnapshot){
-          console.log(childSnapshot.val());
-        });
-      });
+      var planPagos = [];
+      var cuotaR = getValorCuota(this.monto, this.interes, this.numeroCuotas);
+      console.log(cuotaR);
+      this.interes = this.interes / 100;
+      var montoInicial = this.monto;
+      for(var i = 0 ; i < this.numeroCuotas ; i++){
+        var tasa_interes = this.interes*Number(montoInicial);
+        var amortizacion = cuotaR - tasa_interes;
+        var saldoFinal = Number(montoInicial) - amortizacion;
+        planPagos.push({"mes": i+1 , "saldoInicial": Number(montoInicial).toFixed(3) , "intereses": tasa_interes.toFixed(3), "amortizacion": amortizacion.toFixed(3) , "cmensual": cuotaR.toFixed(3), "sfinal": saldoFinal.toFixed(3)});
+        montoInicial = saldoFinal;
+      }
+      this.ppagos = planPagos;
     },
     EnabledButtons(){
       $("#sendButton").removeClass('disabled');
