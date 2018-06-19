@@ -1,0 +1,9 @@
+html,
+body,
+.container {
+    height: 100%;
+    overflow-x: hidden;
+    font-family: 'Raleway';
+    padding: 0.2%;
+}
+
