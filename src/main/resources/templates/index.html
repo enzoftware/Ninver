@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
         integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="stylesheet" href="css/index.css">
     <title>Ninver - Generate your payment plan by the French method. </title>
 </head>
 
@@ -36,24 +36,27 @@
                         </h5>
                     </div>
 
-                    <form>
+                    <form method="post" action="/french_method">
 
                         <input type="hidden" value="register" name="choose">
 
                         <div class="form-group bmd-form-group">
-
-                            <label for="name" class="bmd-label-floating">Name</label>
-                            <input type="text" class="form-control" id="name">
+                            <label for="nameRegister" class="bmd-label-floating">Name</label>
+                            <input type="text" class="form-control" id="nameRegister">
+                        </div>
+                        <div class="form-group bmd-form-group">
+                            <label for="lastNameRegister" class="bmd-label-floating">Last name</label>
+                            <input type="text" class="form-control" id="lastNameRegister">
                         </div>
                         <div class="form-group bmd-form-group">
 
-                            <label for="email" class="bmd-label-floating">Email</label>
-                            <input type="text" class="form-control" id="email">
+                            <label for="emailRegister" class="bmd-label-floating">Email</label>
+                            <input type="text" class="form-control" id="emailRegister">
                         </div>
                         <div class="form-group bmd-form-group">
 
-                            <label for="password" class="bmd-label-floating">Password</label>
-                            <input type="password" class="form-control" id="password">
+                            <label for="passwordRegister" class="bmd-label-floating">Password</label>
+                            <input type="password" class="form-control" id="passwordRegister">
                         </div>
                         <div class="form-group bmd-form-group">
                             <input type="submit" class="form-control btn btn-raised btn-primary" value="Register">
@@ -75,17 +78,17 @@
                         <h3 class="text-center">Welcome back!</h3>
                     </div>
 
-                    <form>
+                    <form method="get" action="/french_method">
                         <input type="hidden" value="login" name="choose">
                         <div class="form-group bmd-form-group">
 
-                            <label for="email" class="bmd-label-floating">Email</label>
-                            <input type="text" class="form-control" id="email">
+                            <label for="emailLogin" class="bmd-label-floating">Email</label>
+                            <input type="text" class="form-control" id="emailLogin">
                         </div>  
                         <div class="form-group bmd-form-group">
 
-                            <label for="password" class="bmd-label-floating">Password</label>
-                            <input type="password" class="form-control" id="password">
+                            <label for="passwordLogin" class="bmd-label-floating">Password</label>
+                            <input type="password" class="form-control" id="passwordLogin">
                         </div>
                         <div class="form-group bmd-form-group">
                             <input type="submit" class="form-control btn btn-raised btn-primary" value="Login">
