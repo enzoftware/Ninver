@@ -10,8 +10,32 @@ public class Log {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int usuario_id;
-    private int accion_id;
+    @ManyToOne
+    Usuario usuario;
+
+    @ManyToOne
+    Accion accion;
+
+    public Log(Usuario usuario, Accion accion) {
+        this.usuario = usuario;
+        this.accion = accion;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Accion getAccion() {
+        return accion;
+    }
+
+    public void setAccion(Accion accion) {
+        this.accion = accion;
+    }
 
     public int getId() {
         return id;
@@ -21,19 +45,4 @@ public class Log {
         this.id = id;
     }
 
-    public int getUsuario_id() {
-        return usuario_id;
-    }
-
-    public void setUsuario_id(int usuario_id) {
-        this.usuario_id = usuario_id;
-    }
-
-    public int getAccion_id() {
-        return accion_id;
-    }
-
-    public void setAccion_id(int accion_id) {
-        this.accion_id = accion_id;
-    }
 }
