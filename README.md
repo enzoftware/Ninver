@@ -12,5 +12,14 @@
 
 </div>
 
-
-
+### TODO: 
+- [x] Create entities
+- [x] Create controllers
+- [ ] Create services
+- [x] Create interfaces
+- [ ] Create users
+- [ ] Login users
+- [x] Calculate by french method
+- [ ] Recalculate by french method
+- [ ] Generate PDF
+- [ ] Deploy to heroku
