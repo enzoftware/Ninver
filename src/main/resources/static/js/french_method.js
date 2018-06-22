@@ -166,7 +166,15 @@ function metodoFrancesPrimerCalculo(){
         var interes = parseFloat(calcularInteres(tep,montoInicial)).toFixed(2);
         var amortizacion = parseFloat(calcularAmortizacion(cuota,interes)).toFixed(2);
         var saldoFinal = parseFloat(montoInicial - amortizacion).toFixed(2);
+        if(i == nperiodos && saldoFinal < 1){
+            saldoFinal = 0.0;
+        }
         addRow(i,tea_row,tep,selectPeriodoGracia,montoInicial,interes,cuota,amortizacion,saldoFinal);
         montoInicial = saldoFinal;
     }
+}
+
+
+function recalcularMetodoFrances() {
+
 }
