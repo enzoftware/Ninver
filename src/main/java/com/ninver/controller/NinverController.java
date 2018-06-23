@@ -16,7 +16,7 @@ import javax.validation.Valid;
 public class NinverController {
 
     @Autowired
-    private IUsuarioService servcioUsuario;
+    private IUsuarioService servicioUsuario;
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String home(Model model){
@@ -27,12 +27,13 @@ public class NinverController {
 
     @RequestMapping(value = "/french_method", method = RequestMethod.GET)
     public String login(Model model){
+
         return "french_method";
     }
 
     @RequestMapping(value = "/french_method", method = RequestMethod.POST)
     public String register(@ModelAttribute @Valid Usuario objUsuario, Model model){
-        Boolean flag = servcioUsuario.agregar(objUsuario);
+        Boolean flag = servicioUsuario.agregar(objUsuario);
         if(flag){
             System.out.println("Usuario agregado");
         }else{
