@@ -17,7 +17,7 @@
 - [x] Create controllers
 - [ ] Create services
 - [x] Create interfaces
-- [ ] Create users
+- [x] Create users
 - [ ] Login users
 - [x] Calculate by french method
 - [ ] Recalculate by french method
