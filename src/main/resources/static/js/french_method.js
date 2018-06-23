@@ -33,14 +33,16 @@ $('#recalcular').on('click',function () {
 
 });
 
-$("tr.table").click(function() {
-    var tableData;
-    tableData = $(this).children('td').map(function () {
-        return $(this).text();
-    }).get();
+$("#genpdf").click(function() {
 
-    alert("Your data is: " + $.trim(tableData[0]) + " , " + $.trim(tableData[1]) + " , " + $.trim(tableData[2]));
+    console.log("xddd");
+    $.ajax({
+       type : 'POST',
+       url : '/test'
+    });
+
 });
+
 
 // FUNCIONES PARA CALCULOS
 

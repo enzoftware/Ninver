@@ -44,4 +44,9 @@ public class NinverController {
         }
         return "french_method";
     }
+
+    @RequestMapping(value = "/test",method = RequestMethod.POST)
+    public void test(){
+        System.out.println("test");
+    }
 }
