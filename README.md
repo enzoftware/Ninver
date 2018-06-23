@@ -15,11 +15,12 @@
 ### TODO: 
 - [x] Create entities
 - [x] Create controllers
+- [x] Create repositories
 - [ ] Create services
 - [x] Create interfaces
 - [x] Create users
 - [ ] Login users
-- [ ] Add actions
+- [x] Add actions
 - [ ] Detect user actions
 - [ ] Save actions on DB
 - [x] Calculate by french method
