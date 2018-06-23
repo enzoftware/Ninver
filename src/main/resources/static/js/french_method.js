@@ -38,7 +38,7 @@ $("#genpdf").click(function() {
     console.log("xddd");
     $.ajax({
        type : 'POST',
-       url : '/test'
+       url : '/pdf'
     });
 
 });

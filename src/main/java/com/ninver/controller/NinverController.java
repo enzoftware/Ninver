@@ -1,5 +1,6 @@
 package com.ninver.controller;
 
+import com.ninver.entities.Log;
 import com.ninver.entities.Usuario;
 import com.ninver.service.interf.ILogService;
 import com.ninver.service.interf.IUsuarioService;
@@ -21,9 +22,11 @@ public class NinverController {
     @Autowired
     private ILogService servicioLog;
 
+    Usuario usuarioObj;
+
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String home(Model model){
-        Usuario usuarioObj = new Usuario();
+        usuarioObj = new Usuario();
         model.addAttribute("usuario",usuarioObj);
         return "index";
     }
@@ -36,6 +39,7 @@ public class NinverController {
 
     @RequestMapping(value = "/french_method", method = RequestMethod.POST)
     public String register(@ModelAttribute @Valid Usuario objUsuario, Model model){
+        usuarioObj = objUsuario;
         Boolean flag = servicioUsuario.agregar(objUsuario);
         if(flag){
             System.out.println("Usuario agregado");
@@ -45,8 +49,10 @@ public class NinverController {
         return "french_method";
     }
 
-    @RequestMapping(value = "/test",method = RequestMethod.POST)
-    public void test(){
-        System.out.println("test");
+    @RequestMapping(value = "/pdf",method = RequestMethod.POST)
+    public void generatePdf(){
+        System.out.println("PDF generado"+usuarioObj.getId());
+        Log log;
+
     }
 }
