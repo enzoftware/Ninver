@@ -3,7 +3,6 @@ package com.ninver.controller;
 import com.ninver.entities.Usuario;
 import com.ninver.service.interf.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,7 +36,7 @@ public class NinverController {
         if(flag){
             System.out.println("Usuario agregado");
         }else{
-            System.out.println("Algo salio!");
+            System.out.println("Algo salio mal!");
         }
         return "french_method";
     }
