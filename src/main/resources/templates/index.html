@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -36,31 +36,36 @@
                         </h5>
                     </div>
 
-                    <form method="post" action="/french_method">
+                    <form method="post" action="/french_method" th:object="${usuario}">
 
                         <input type="hidden" value="register" name="choose">
 
                         <div class="form-group bmd-form-group">
                             <label for="nameRegister" class="bmd-label-floating">Name</label>
-                            <input type="text" class="form-control" id="nameRegister">
+                            <input th:field="*{nombres}" type="text" class="form-control" id="nameRegister">
                         </div>
+
                         <div class="form-group bmd-form-group">
                             <label for="lastNameRegister" class="bmd-label-floating">Last name</label>
-                            <input type="text" class="form-control" id="lastNameRegister">
+                            <input th:field="*{apellidos}" type="text" class="form-control" id="lastNameRegister">
                         </div>
+
                         <div class="form-group bmd-form-group">
 
                             <label for="emailRegister" class="bmd-label-floating">Email</label>
-                            <input type="text" class="form-control" id="emailRegister">
+                            <input th:field="*{email}" type="text" class="form-control" id="emailRegister">
                         </div>
+
                         <div class="form-group bmd-form-group">
 
                             <label for="passwordRegister" class="bmd-label-floating">Password</label>
-                            <input type="password" class="form-control" id="passwordRegister">
+                            <input th:field="*{contrasena}" type="password" class="form-control" id="passwordRegister">
                         </div>
+
                         <div class="form-group bmd-form-group">
                             <input type="submit" class="form-control btn btn-raised btn-primary" value="Register">
                         </div>
+
                     </form>
                     <div class="group">
                         <div class="pull-center">

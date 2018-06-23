@@ -1,7 +1,6 @@
 package com.ninver.entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
 import java.util.List;
 
 @Entity
@@ -12,50 +11,45 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String nombre;
-    private String apellido;
+    private String nombres;
+    private String apellidos;
     private String contrasena;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     @OneToMany(mappedBy = "usuario")
-    private List<Log> logs;
 
-    public Usuario(String nombre, String apellido, String contrasena) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.contrasena = contrasena;
-    }
+    private List<Log> logs;
 
     public int getId() {
         return id;
-
-    }
-
-    public List<Log> getLogs() {
-        return logs;
-    }
-
-    public void setLogs(List<Log> logs) {
-        this.logs = logs;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombres() {
+        return nombres;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
     public String getContrasena() {
@@ -64,5 +58,13 @@ public class Usuario {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public List<Log> getLogs() {
+        return logs;
+    }
+
+    public void setLogs(List<Log> logs) {
+        this.logs = logs;
     }
 }

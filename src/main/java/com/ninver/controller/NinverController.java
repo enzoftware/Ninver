@@ -1,15 +1,27 @@
 package com.ninver.controller;
 
+import com.ninver.entities.Usuario;
+import com.ninver.service.interf.IUsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
 
 @Controller
 public class NinverController {
 
+    @Autowired
+    private IUsuarioService servcioUsuario;
+
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String home(Model model){
+        Usuario usuarioObj = new Usuario();
+        model.addAttribute("usuario",usuarioObj);
         return "index";
     }
 
@@ -19,10 +31,13 @@ public class NinverController {
     }
 
     @RequestMapping(value = "/french_method", method = RequestMethod.POST)
-    public String register(Model model){
+    public String register(@ModelAttribute @Valid Usuario objUsuario, Model model){
+        Boolean flag = servcioUsuario.agregar(objUsuario);
+        if(flag){
+            System.out.println("Usuario agregado");
+        }else{
+            System.out.println("Algo salio!");
+        }
         return "french_method";
     }
-
-
-
 }
