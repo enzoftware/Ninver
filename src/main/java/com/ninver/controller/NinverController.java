@@ -1,6 +1,7 @@
 package com.ninver.controller;
 
 import com.ninver.entities.Usuario;
+import com.ninver.service.interf.ILogService;
 import com.ninver.service.interf.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,9 @@ public class NinverController {
 
     @Autowired
     private IUsuarioService servicioUsuario;
+
+    @Autowired
+    private ILogService servicioLog;
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String home(Model model){

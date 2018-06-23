@@ -29,6 +29,19 @@ $('#calcular').on('click', function () {
     metodoFrancesPrimerCalculo();
 });
 
+$('#recalcular').on('click',function () {
+
+});
+
+$("tr.table").click(function() {
+    var tableData;
+    tableData = $(this).children('td').map(function () {
+        return $(this).text();
+    }).get();
+
+    alert("Your data is: " + $.trim(tableData[0]) + " , " + $.trim(tableData[1]) + " , " + $.trim(tableData[2]));
+});
+
 // FUNCIONES PARA CALCULOS
 
 function calcTEP(_tea) {
@@ -135,7 +148,7 @@ function calcularCuotaCambioDeTasa(_tep,_n,_nc,_c){
 function addRow(_ind,_tea,_tep,_pg,_si,_int,_cuota,_amort,_sf){
     $('#tableResult > tbody:last-child')
         .append(
-            '<tr> ' +
+            '<tr class="table"> ' +
             '<th>'+_ind+'</th>'+
             '<td>'+_tea+'</td>'+
             '<td>'+_tep+'</td>'+
@@ -149,11 +162,6 @@ function addRow(_ind,_tea,_tep,_pg,_si,_int,_cuota,_amort,_sf){
 }
 
 function metodoFrancesPrimerCalculo(){
-    /*
-    var lol = 1;
-    var xd = '<input type="number" step="0.01" class="form-control" id="porcCuotaInicial" value="'+ lol +'">';
-    addRow(1,1,1,selectPeriodoGracia,1,1,xd,1,1);
-    */
 
     var cuota = parseFloat(calcularCuota(tep,nperiodos,prestamo)).toFixed(2);
     var montoInicial = parseFloat(prestamo).toFixed(2);
@@ -176,5 +184,8 @@ function metodoFrancesPrimerCalculo(){
 
 
 function recalcularMetodoFrances() {
+    var last_tea = tea;
+    for (var i = 1 ; i <= nperiodos; i++){
 
+    }
 }
