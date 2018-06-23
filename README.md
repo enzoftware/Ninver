@@ -19,6 +19,9 @@
 - [x] Create interfaces
 - [x] Create users
 - [ ] Login users
+- [ ] Add actions
+- [ ] Detect user actions
+- [ ] Save actions on DB
 - [x] Calculate by french method
 - [ ] Recalculate by french method
 - [ ] Generate PDF
