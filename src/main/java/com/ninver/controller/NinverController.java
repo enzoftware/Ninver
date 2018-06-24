@@ -1,5 +1,6 @@
 package com.ninver.controller;
 
+import com.ninver.constants.Actions;
 import com.ninver.entities.Log;
 import com.ninver.entities.Usuario;
 import com.ninver.service.interf.ILogService;
@@ -40,9 +41,13 @@ public class NinverController {
     @RequestMapping(value = "/french_method", method = RequestMethod.POST)
     public String register(@ModelAttribute @Valid Usuario objUsuario, Model model){
         usuarioObj = objUsuario;
+        Log log = new Log();
+        log.setUsuario(usuarioObj);
+        log.setAccion_id(Actions.SING_UP.getLevelCode());
         Boolean flag = servicioUsuario.agregar(objUsuario);
-        if(flag){
-            System.out.println("Usuario agregado");
+        Boolean flag2 = servicioLog.agregarLog(log);
+        if(flag && flag2){
+            System.out.println("EL USUARIO "+usuarioObj.getId()+" SE HA REGISTRADO");
         }else{
             System.out.println("Algo salio mal!");
         }
@@ -51,8 +56,40 @@ public class NinverController {
 
     @RequestMapping(value = "/pdf",method = RequestMethod.POST)
     public void generatePdf(){
-        System.out.println("PDF generado"+usuarioObj.getId());
-        Log log;
+        Log log = new Log();
+        log.setUsuario(usuarioObj);
+        log.setAccion_id(Actions.PDF.getLevelCode());
+        Boolean flag = servicioLog.agregarLog(log);
+        if(flag){
+            System.out.println("EL USUARIO "+usuarioObj.getId()+" HA GENERADO UN PDF");
+        }else{
+            System.out.println("Algo salio mal!");
+        }
+    }
 
+    @RequestMapping(value = "/recalcular",method = RequestMethod.POST)
+    public void recalcular(){
+        Log log = new Log();
+        log.setUsuario(usuarioObj);
+        log.setAccion_id(Actions.RECALCULATE.getLevelCode());
+        Boolean flag = servicioLog.agregarLog(log);
+        if(flag){
+            System.out.println("EL USUARIO "+usuarioObj.getId()+" HA RECALCULADO");
+        }else{
+            System.out.println("Algo salio mal!");
+        }
+    }
+
+    @RequestMapping(value = "/reiniciar",method = RequestMethod.POST)
+    public void otraVez(){
+        Log log = new Log();
+        log.setUsuario(usuarioObj);
+        log.setAccion_id(Actions.REINICIAR.getLevelCode());
+        Boolean flag = servicioLog.agregarLog(log);
+        if(flag){
+            System.out.println("EL USUARIO "+usuarioObj.getId()+" HA REINICIADO");
+        }else{
+            System.out.println("Algo salio mal!");
+        }
     }
 }

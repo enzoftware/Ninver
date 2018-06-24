@@ -13,28 +13,23 @@ public class Log {
     @ManyToOne
     Usuario usuario;
 
-    @ManyToOne
-    Accion accion;
+    private int accion_id;
 
-    public Log(Usuario usuario, Accion accion) {
-        this.usuario = usuario;
-        this.accion = accion;
+    public int getAccion_id() {
+        return accion_id;
+    }
+
+    public void setAccion_id(int accion_id) {
+        this.accion_id = accion_id;
     }
 
     public Usuario getUsuario() {
         return usuario;
+
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-
-    public Accion getAccion() {
-        return accion;
-    }
-
-    public void setAccion(Accion accion) {
-        this.accion = accion;
     }
 
     public int getId() {

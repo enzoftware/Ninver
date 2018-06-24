@@ -5,7 +5,8 @@ public enum Actions {
     SING_UP(2),
     CALCULATE(3),
     RECALCULATE(4),
-    PDF(5);
+    PDF(5),
+    REINICIAR(6);
 
     private final int levelCode;
 

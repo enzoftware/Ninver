@@ -29,16 +29,33 @@ $('#calcular').on('click', function () {
     metodoFrancesPrimerCalculo();
 });
 
-$('#recalcular').on('click',function () {
-
-});
 
 $("#genpdf").click(function() {
 
-    console.log("xddd");
+    console.log("PDF GENERADO");
     $.ajax({
        type : 'POST',
        url : '/pdf'
+    });
+
+});
+
+$("#recalcular").click(function() {
+
+    console.log("RECALCULAR");
+    $.ajax({
+        type : 'POST',
+        url : '/recalcular'
+    });
+
+});
+
+$("#reload").click(function() {
+
+    console.log("REINICIAR");
+    $.ajax({
+        type : 'POST',
+        url : '/reiniciar'
     });
 
 });
