@@ -39,11 +39,21 @@ $('#calcular').on('click', function () {
 
 $("#genpdf").click(function() {
 
+    console.log("xd");
+    html2canvas($('#tableResult').get(0)).then(function(canvas) {
+        var dataURL = canvas.toDataURL('image/png');
+        var w = window.open('about:blank', 'image from canvas');
+        w.document.write("<img src='" + dataURL + "' alt='from canvas'/>");
+    });
+
+
     console.log("PDF GENERADO");
     $.ajax({
        type : 'POST',
        url : '/pdf'
     });
+
+
 
 });
 
@@ -64,6 +74,8 @@ $("#reload").click(function() {
         type : 'POST',
         url : '/reiniciar'
     });
+
+    location.reload();
 
 });
 

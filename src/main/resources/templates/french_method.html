@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -17,7 +17,7 @@
 <body>
 
     <div class="container">
-        <h1>Welcome, Enzo</h1>
+        <h1 th:text="'Welcome to Ninver : '+ ${nombre} +' '+ ${apellido}"></h1>
         <br>
 
         <h5>Datos de entrada</h5>
@@ -96,7 +96,7 @@
             </div>
             <div class="row">
                 <button type="button" class="btn btn--lg btn--green col" id="recalcular">Recalcular</button>
-                <button type="button" class="btn btn--lg btn--red col" id="genpdf">Generar PDF</button>
+                <button type="button" class="btn btn--lg btn--red col" id="genpdf">Generar imagen</button>
                 <button type="button" class="btn btn--lg btn--blue col" id="reload" >Otra vez</button>
             </div>
 
@@ -106,6 +106,7 @@
     </div>
 
     <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/html2canvas.min.js"></script>
     <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U"
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"

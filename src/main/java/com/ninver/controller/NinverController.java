@@ -41,6 +41,18 @@ public class NinverController {
         if(user != null){
             if(user.getContrasena().equals(contrasena)){
                 System.out.println("USUARIO LOGEADO CORRECTAMENTE");
+                usuarioObj = user;
+                Log log = new Log();
+                log.setUsuario(usuarioObj);
+                log.setAccion_id(Actions.SING_IN.getLevelCode());
+                Boolean flag = servicioLog.agregarLog(log);
+                if(flag){
+                    System.out.println("EL USUARIO "+usuarioObj.getId()+" HA INCIADO SESION");
+                }else{
+                    System.out.println("Algo salio mal!");
+                }
+                model.addAttribute("nombre",usuarioObj.getNombres());
+                model.addAttribute("apellido",usuarioObj.getApellidos());
                 return "french_method";
             }else {
                 System.out.println("CONTRASEÑA INCORRECTA");
@@ -49,7 +61,7 @@ public class NinverController {
             }
         }else{
             System.out.println("OBJETO NULO");
-            //TODO:  ENVIAR MENSAJE DE NO HAY USUARIO , DEBERIAS REGISTRARTE        
+            //TODO:  ENVIAR MENSAJE DE NO HAY USUARIO , DEBERIAS REGISTRARTE
             return "redirect:/";
         }
     }
@@ -67,6 +79,8 @@ public class NinverController {
         }else{
             System.out.println("Algo salio mal!");
         }
+        model.addAttribute("nombre",usuarioObj.getNombres());
+        model.addAttribute("apellido",usuarioObj.getApellidos());
         return "french_method";
     }
 
