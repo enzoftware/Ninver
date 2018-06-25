@@ -24,10 +24,10 @@ var nperiodos = 0;
 // EVENTOS DEL DOM
 
 $('#calcular').on('click', function () {
+    console.log("CALCULAR");
     getValuesIntermediate();
     setValuesIntermediate();
     metodoFrancesPrimerCalculo();
-    console.log("CALCULAR");
 
     $.ajax({
         type : 'POST',
