@@ -25,5 +25,5 @@
 - [x] Save actions on DB
 - [x] Calculate by french method
 - [ ] Recalculate by french method
-- [ ] Generate PDF/Image(PNG)
+- [x] Generate PDF/Image(PNG)
 - [ ] Deploy to heroku :fire:
