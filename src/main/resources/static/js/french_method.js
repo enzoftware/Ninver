@@ -27,6 +27,13 @@ $('#calcular').on('click', function () {
     getValuesIntermediate();
     setValuesIntermediate();
     metodoFrancesPrimerCalculo();
+    console.log("CALCULAR");
+
+    $.ajax({
+        type : 'POST',
+        url : '/calcular'
+    });
+
 });
 
 
@@ -41,7 +48,7 @@ $("#genpdf").click(function() {
 });
 
 $("#recalcular").click(function() {
-
+    
     console.log("RECALCULAR");
     $.ajax({
         type : 'POST',
@@ -59,7 +66,6 @@ $("#reload").click(function() {
     });
 
 });
-
 
 // FUNCIONES PARA CALCULOS
 

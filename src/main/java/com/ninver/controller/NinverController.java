@@ -92,4 +92,17 @@ public class NinverController {
             System.out.println("Algo salio mal!");
         }
     }
+
+    @RequestMapping(value = "/calcular",method = RequestMethod.POST)
+    public void calcular(){
+        Log log = new Log();
+        log.setUsuario(usuarioObj);
+        log.setAccion_id(Actions.CALCULATE.getLevelCode());
+        Boolean flag = servicioLog.agregarLog(log);
+        if(flag){
+            System.out.println("EL USUARIO "+usuarioObj.getId()+" HA CALCULADO");
+        }else{
+            System.out.println("Algo salio mal!");
+        }
+    }
 }
