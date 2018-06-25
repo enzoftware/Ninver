@@ -16,13 +16,13 @@
 - [x] Create entities
 - [x] Create controllers
 - [x] Create repositories
-- [ ] Create services
+- [x] Create services
 - [x] Create interfaces
 - [x] Create users
 - [ ] Login users
 - [x] Add actions
-- [ ] Detect user actions
-- [ ] Save actions on DB
+- [x] Detect user actions
+- [x] Save actions on DB
 - [x] Calculate by french method
 - [ ] Recalculate by french method
 - [ ] Generate PDF
