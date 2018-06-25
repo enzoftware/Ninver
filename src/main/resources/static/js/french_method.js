@@ -34,6 +34,11 @@ $('#calcular').on('click', function () {
         url : '/calcular'
     });
 
+    $(this).attr('disabled',true);
+    $("#recalcular").attr('disabled',false);
+    $("#genpdf").attr('disabled',false);
+    $("#reload").attr('disabled',false);
+
 });
 
 
