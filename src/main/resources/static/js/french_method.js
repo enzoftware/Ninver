@@ -48,7 +48,7 @@ $("#genpdf").click(function() {
 });
 
 $("#recalcular").click(function() {
-    
+
     console.log("RECALCULAR");
     $.ajax({
         type : 'POST',
