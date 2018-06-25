@@ -19,11 +19,11 @@
 - [x] Create services
 - [x] Create interfaces
 - [x] Create users
-- [ ] Login users
+- [x] Login users
 - [x] Add actions
 - [x] Detect user actions
 - [x] Save actions on DB
 - [x] Calculate by french method
 - [ ] Recalculate by french method
-- [ ] Generate PDF
-- [ ] Deploy to heroku
+- [ ] Generate PDF/Image(PNG)
+- [ ] Deploy to heroku :fire:
