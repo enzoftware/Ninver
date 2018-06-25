@@ -1,3 +1,5 @@
+
+
 // CONSTANTES
 var ndiasano = 360;
 
@@ -58,7 +60,9 @@ $("#genpdf").click(function() {
        url : '/pdf'
     });
 
-
+    var data = table.row(0).data();
+    console.log(data);
+    console.log("xd");
 
 });
 
@@ -69,6 +73,8 @@ $("#recalcular").click(function() {
         type : 'POST',
         url : '/recalcular'
     });
+
+    recalcularMetodoFrances();
 
 });
 
@@ -191,7 +197,7 @@ function addRow(_ind,_tea,_tep,_pg,_si,_int,_cuota,_amort,_sf){
     $('#tableResult > tbody:last-child')
         .append(
             '<tr class="table"> ' +
-            '<th>'+_ind+'</th>'+
+            '<td>'+_ind+'</td>'+
             '<td>'+_tea+'</td>'+
             '<td>'+_tep+'</td>'+
             '<td>'+_pg+'</td>'+
@@ -226,6 +232,35 @@ function metodoFrancesPrimerCalculo(){
 
 
 function recalcularMetodoFrances() {
+    var table = $("table tbody");
+
+    table.find('tr').each(function (i) {
+        var $tds = $(this).find('td'),
+            nmonth = $tds.eq(0).text(),
+            teamonth = $tds.eq(1).find('input').val(),
+            tepmonth = $tds.eq(2).text(),
+            pgmonth = $tds.eq(3).find('select option:selected').text(),
+            simonth = $tds.eq(4).text(),
+            interesmonth = $tds.eq(5).text(),
+            cuotamonth = $tds.eq(6).text(),
+            amortimonth = $tds.eq(7).text(),
+            sfmonth = $tds.eq(8).text();
+
+        // do something with productId, product, Quantity
+        console.log(
+            + nmonth + " "
+            + teamonth + " "
+            + tepmonth + " "
+            + pgmonth + " "
+            + simonth + " "
+            + interesmonth + " "
+            + cuotamonth + " "
+            + amortimonth + " "
+            + sfmonth );
+    });
+
+    console.log("xdxsssssdd");
+
     var last_tea = tea;
     for (var i = 1 ; i <= nperiodos; i++){
 
