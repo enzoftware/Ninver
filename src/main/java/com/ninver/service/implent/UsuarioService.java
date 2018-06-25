@@ -22,7 +22,14 @@ class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public Boolean buscarPorEmail(String email) {
-        return false;
+    public Usuario buscarPorEmail(String email) {
+        Usuario user = repo.findByEmail(email);
+        if (user != null) {
+            System.out.println(user.getNombres());
+            return user;
+        }else{
+            System.out.println("ALGO SALIO MAL");
+            return null;
+        }
     }
 }

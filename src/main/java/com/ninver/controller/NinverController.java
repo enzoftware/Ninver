@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -33,9 +35,23 @@ public class NinverController {
     }
 
     @RequestMapping(value = "/french_method", method = RequestMethod.GET)
-    public String login(Model model){
-
-        return "french_method";
+    public String login(@RequestParam("correo") String correo, @RequestParam("contrasena") String contrasena , RedirectAttributes redirAtt , Model model){
+        System.out.println(correo+" "+contrasena);
+        Usuario user = servicioUsuario.buscarPorEmail(correo);
+        if(user != null){
+            if(user.getContrasena().equals(contrasena)){
+                System.out.println("USUARIO LOGEADO CORRECTAMENTE");
+                return "french_method";
+            }else {
+                System.out.println("CONTRASEÑA INCORRECTA");
+                // TODO :  ENVIAR MENSAJE DE CONTRASEÑA INCORRECTA
+                return "redirect:/";
+            }
+        }else{
+            System.out.println("OBJETO NULO");
+            //TODO:  ENVIAR MENSAJE DE NO HAY USUARIO , DEBERIAS REGISTRARTE        
+            return "redirect:/";
+        }
     }
 
     @RequestMapping(value = "/french_method", method = RequestMethod.POST)
