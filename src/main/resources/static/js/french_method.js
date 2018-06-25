@@ -46,7 +46,7 @@ $('#calcular').on('click', function () {
 
 $("#genpdf").click(function() {
 
-    console.log("xd");
+
     html2canvas($('#tableResult').get(0)).then(function(canvas) {
         var dataURL = canvas.toDataURL('image/png');
         var w = window.open('about:blank', 'image from canvas');
@@ -61,8 +61,6 @@ $("#genpdf").click(function() {
     });
 
     var data = table.row(0).data();
-    console.log(data);
-    console.log("xd");
 
 });
 
@@ -186,6 +184,7 @@ function calcularCuotaCambioDeTasa(_tep,_n,_nc,_c){
     _c: ES EL MONTO DEL PRESTAMO
     _tep: ES LA TASA EFECTIVA DEL PERIODO DE PAGO
     _n: ES EL NUMERO TOTAL DE CUOTAS A PAGAR
+    _nc: ES EL NUMERO DE LA CUOTA ACTUAL
     
     EL RESULTADO REPRESENTA LA ANUALIDAD O CUOTA A PAGAR
     */
@@ -233,36 +232,66 @@ function metodoFrancesPrimerCalculo(){
 
 function recalcularMetodoFrances() {
     var table = $("table tbody");
+    var last_tea = Number(tea);
+
+    var auxsaldofin = null,cuotaactual = null;
 
     table.find('tr').each(function (i) {
-        var $tds = $(this).find('td'),
-            nmonth = $tds.eq(0).text(),
-            teamonth = $tds.eq(1).find('input').val(),
-            tepmonth = $tds.eq(2).text(),
-            pgmonth = $tds.eq(3).find('select option:selected').text(),
-            simonth = $tds.eq(4).text(),
-            interesmonth = $tds.eq(5).text(),
-            cuotamonth = $tds.eq(6).text(),
-            amortimonth = $tds.eq(7).text(),
-            sfmonth = $tds.eq(8).text();
 
-        // do something with productId, product, Quantity
-        console.log(
-            + nmonth + " "
-            + teamonth + " "
-            + tepmonth + " "
-            + pgmonth + " "
-            + simonth + " "
-            + interesmonth + " "
-            + cuotamonth + " "
-            + amortimonth + " "
-            + sfmonth );
+
+        var $tds = $(this).find('td'),
+            nmonth = Number($tds.eq(0).text()),
+            teamonth = Number($tds.eq(1).find('input').val()),
+            tepmonth = Number($tds.eq(2).text()),
+            pgmonth = $tds.eq(3).find('select option:selected').text(),
+            simonth = Number($tds.eq(4).text()),
+            interesmonth = Number($tds.eq(5).text()),
+            cuotamonth = Number($tds.eq(6).text()),
+            amortimonth = Number($tds.eq(7).text()),
+            sfmonth = Number($tds.eq(8).text());
+
+        // TODO : IF != TEA => RECALC CUOTA => SWITCH PG => CALC AND REPEAT
+
+        if(auxsaldofin != null){
+            simonth = auxsaldofin;
+        }
+
+        if(cuotaactual == null){
+            cuotaactual = cuotamonth;
+        }
+
+        tepmonth = Number(parseFloat(calcTEP(teamonth)).toFixed(7));
+
+
+
+        if(Number(last_tea) !== Number(teamonth)){
+            cuotamonth = calcularCuotaCambioDeTasa(tepmonth,nperiodos,nmonth,simonth);
+            cuotaactual =Number(cuotamonth);
+            last_tea = teamonth;
+        }
+
+        interesmonth = calcularInteres(tepmonth,simonth);
+
+        switch (pgmonth){
+            case 'P':
+                cuotamonth = interesmonth;
+                amortimonth = 0.00;
+                break;
+            case 'T':
+                amortimonth = 0.00;
+                cuotamonth = 0.00;
+                break;
+            case 'S':
+                amortimonth = cuotamonth - interesmonth;
+                break;
+            default:
+                console.log("fail");
+                break;
+        }
+
+        console.log(cuotaactual);
+        sfmonth = simonth + interesmonth - cuotaactual;
+        auxsaldofin = sfmonth;
     });
 
-    console.log("xdxsssssdd");
-
-    var last_tea = tea;
-    for (var i = 1 ; i <= nperiodos; i++){
-
-    }
 }
