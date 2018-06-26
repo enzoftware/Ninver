@@ -234,7 +234,7 @@ function recalcularMetodoFrances() {
     var table = $("table tbody");
     var last_tea = Number(tea);
 
-    var auxsaldofin = null,cuotaactual = null;
+    var auxsaldofin = null,cuotaactual = null, cambio = false;
 
     table.find('tr').each(function (i) {
 
@@ -274,14 +274,20 @@ function recalcularMetodoFrances() {
 
         switch (pgmonth){
             case 'P':
+                cambio = true;
                 cuotamonth = interesmonth;
                 amortimonth = 0.00;
                 break;
             case 'T':
+                cambio = true;
                 amortimonth = 0.00;
                 cuotamonth = 0.00;
                 break;
             case 'S':
+                if(cambio === true){
+                    cuotamonth = calcularCuotaCambioDeTasa(tepmonth,nperiodos,nmonth,simonth);
+                    cuotaactual =Number(cuotamonth);
+                }
                 amortimonth = cuotamonth - interesmonth;
                 break;
             default:
@@ -289,9 +295,17 @@ function recalcularMetodoFrances() {
                 break;
         }
 
-        console.log(cuotaactual);
-        sfmonth = simonth + interesmonth - cuotaactual;
+        sfmonth = simonth + interesmonth - cuotamonth;
         auxsaldofin = sfmonth;
+
+        if(cambio === true){
+            if(sfmonth < 1) sfmonth = 0;
+            console.log(simonth+" "+interesmonth+" "+cuotamonth+" "+amortimonth+" "+sfmonth);
+            cambio = false;
+        }else {
+            if(sfmonth < 1) sfmonth = 0;
+            console.log(simonth+" "+interesmonth+" "+cuotaactual+" "+amortimonth+" "+sfmonth);
+        }
     });
 
 }
