@@ -300,11 +300,34 @@ function recalcularMetodoFrances() {
 
         if(cambio === true){
             if(sfmonth < 1) sfmonth = 0;
+
             console.log(simonth+" "+interesmonth+" "+cuotamonth+" "+amortimonth+" "+sfmonth);
+
+            $tds.eq(0).text(nmonth);
+            $tds.eq(1).find('input').val(teamonth);
+            $tds.eq(2).text(tepmonth.toFixed(7));
+            $tds.eq(3).find('select option:selected').text(pgmonth);
+            $tds.eq(4).text(simonth.toFixed(2));
+            $tds.eq(5).text(interesmonth.toFixed(2));
+            $tds.eq(6).text(cuotamonth.toFixed(2));
+            $tds.eq(7).text(amortimonth.toFixed(2));
+            $tds.eq(8).text(sfmonth.toFixed(2));
+
             cambio = false;
         }else {
             if(sfmonth < 1) sfmonth = 0;
+
             console.log(simonth+" "+interesmonth+" "+cuotaactual+" "+amortimonth+" "+sfmonth);
+
+            $tds.eq(0).text(nmonth);
+            $tds.eq(1).find('input').val(teamonth);
+            $tds.eq(2).text(tepmonth.toFixed(7));
+            $tds.eq(3).find('select option:selected').text(pgmonth);
+            $tds.eq(4).text(simonth.toFixed(2));
+            $tds.eq(5).text(interesmonth.toFixed(2));
+            $tds.eq(6).text(cuotaactual.toFixed(2));
+            $tds.eq(7).text(amortimonth.toFixed(2));
+            $tds.eq(8).text(sfmonth.toFixed(2));
         }
     });
 
