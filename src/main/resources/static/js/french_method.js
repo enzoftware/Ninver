@@ -250,8 +250,6 @@ function recalcularMetodoFrances() {
             amortimonth = Number($tds.eq(7).text()),
             sfmonth = Number($tds.eq(8).text());
 
-        // TODO : IF != TEA => RECALC CUOTA => SWITCH PG => CALC AND REPEAT
-
         if(auxsaldofin != null){
             simonth = auxsaldofin;
         }
@@ -261,8 +259,6 @@ function recalcularMetodoFrances() {
         }
 
         tepmonth = Number(parseFloat(calcTEP(teamonth)).toFixed(7));
-
-
 
         if(Number(last_tea) !== Number(teamonth)){
             cuotamonth = calcularCuotaCambioDeTasa(tepmonth,nperiodos,nmonth,simonth);
@@ -291,7 +287,7 @@ function recalcularMetodoFrances() {
                 amortimonth = cuotamonth - interesmonth;
                 break;
             default:
-                console.log("fail");
+                console.log("default");
                 break;
         }
 
@@ -300,9 +296,6 @@ function recalcularMetodoFrances() {
 
         if(cambio === true){
             if(sfmonth < 1) sfmonth = 0;
-
-            console.log(simonth+" "+interesmonth+" "+cuotamonth+" "+amortimonth+" "+sfmonth);
-
             $tds.eq(0).text(nmonth);
             $tds.eq(1).find('input').val(teamonth);
             $tds.eq(2).text(tepmonth.toFixed(7));
@@ -316,8 +309,6 @@ function recalcularMetodoFrances() {
             cambio = false;
         }else {
             if(sfmonth < 1) sfmonth = 0;
-
-            console.log(simonth+" "+interesmonth+" "+cuotaactual+" "+amortimonth+" "+sfmonth);
 
             $tds.eq(0).text(nmonth);
             $tds.eq(1).find('input').val(teamonth);
