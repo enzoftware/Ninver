@@ -25,6 +25,6 @@
 - [x] Save actions on DB
 - [x] Calculate by french method
 - [x] Get the value of the data in the table rows for recalculate
-- [ ] Recalculate by french method
+- [x] Recalculate by french method
 - [x] Generate image(PNG)
 - [ ] Deploy to heroku :fire:
