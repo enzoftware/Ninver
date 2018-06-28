@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
@@ -24,15 +25,15 @@
         <div class="form-row">
             <div class="form-group bmd-form-group col">
                 <label for="precioVenta" class="bmd-label-floating">Precio Venta (S/.) </label>
-                <input type="number" step="0.01" class="form-control" id="precioVenta">
+                <input data-toggle="tooltip" data-placement="bottom" title="El valor del bono en soles" type="number" step="0.01" class="form-control" id="precioVenta">
             </div>
             <div class="form-group bmd-form-group col">
                 <label for="porcCuotaInicial" class="bmd-label-floating">Cuota Inicial (%) </label>
-                <input type="number" step="0.01" class="form-control" id="porcCuotaInicial">
+                <input  data-toggle="tooltip" data-placement="bottom" title="Porcentaje del pago que se hara al inicio" type="number" step="0.01" class="form-control" id="porcCuotaInicial">
             </div>
             <div class="form-group bmd-form-group col">
                 <label for="tea" class="bmd-label-floating">TEA (%)</label>
-                <input type="number" step="0.01" class="form-control" id="tea">
+                <input  data-toggle="tooltip" data-placement="bottom" title="Tasa Efectiva Anual" type="number" step="0.01" class="form-control" id="tea">
             </div>
             <div class="form-group bmd-form-group col">
                 <label for="frecuencia" class="bmd-label-floating">Frecuencia</label>
@@ -52,7 +53,7 @@
             </div>
             <div class="form-group bmd-form-group col">
                 <label for="tir" class="bmd-label-floating">TIR</label>
-                <input type="number" class="form-control" id="tir">
+                <input  data-toggle="tooltip" data-placement="bottom" title="Tasa Interna de Retorno" type="number" class="form-control" id="tir">
             </div>
             <div class="form-group bmd-form-group col">
                 <button class="btn btn-raised btn-primary" id="calcular">Calcular</button>
@@ -63,11 +64,11 @@
         <h5>Datos intermedios</h5>
         <div class="form-row">
             <div class="form-group bmd-form-group col-md-2">
-                <label for="prestamo">Prestamo (S/.)</label>
+                <label  data-toggle="tooltip" data-placement="top" title="Valor del prestamo" for="prestamo">Prestamo (S/.)</label>
                 <p id="prestamo">0</p>
             </div>
             <div class="form-group bmd-form-group col-md-2">
-                <label for="tep">TEP (%)</label>
+                <label  data-toggle="tooltip" data-placement="top" title="Tasa Efectiva del Periodo" for="tep">TEP (%)</label>
                 <p id="tep">0</p>
             </div>
             <div class="form-group bmd-form-group col-md-2">
@@ -79,23 +80,23 @@
         <h5>Datos finales</h5>
         <div class="form-row">
             <div class="form-group bmd-form-group col">
-                <label for="tcea">TCEA(emisor)</label>
+                <label data-toggle="tooltip" data-placement="top" title="Tasa de Costo Efectivo Anual - Emisor" for="tcea">TCEA</label>
                 <p id="tcea">0</p>
             </div>
             <div class="form-group bmd-form-group col">
-                <label for="trea">TREA(inversor)</label>
+                <label data-toggle="tooltip" data-placement="top" title="Tasa de Rendimiento Efectivo Anual - Inversor"  for="trea">TREA</label>
                 <p id="trea">0</p>
             </div>
             <div class="form-group bmd-form-group col">
-                <label for="convexidad">Convexidad</label>
+                <label data-toggle="tooltip" data-placement="top" title="Mide el cambio en la duración del bono como resultado de un cambio en la rentabilidad."  for="convexidad">Convexidad</label>
                 <p id="convexidad">0</p>
             </div>
             <div class="form-group bmd-form-group col">
-                <label for="duracion">Duracion</label>
+                <label data-toggle="tooltip" data-placement="top" title="La duración de un bono es la media del vencimiento de todos los flujos de caja de ese bono, es decir, expresa en años cuánto tiempo tardarán los flujos de caja de ese bono en ser pagados" for="duracion">Duracion</label>
                 <p id="duracion">0</p>
             </div>
             <div class="form-group bmd-form-group col">
-                <label for="duracionmodif">Duracion modificada</label>
+                <label data-toggle="tooltip" data-placement="top" title="Mide la sensibilidad de este tipo de activo financiero ante las variaciones de los tipos de interés." for="duracionmodif">Duracion modificada</label>
                 <p id="duracionmodif">0</p>
             </div>
         </div>
@@ -129,6 +130,10 @@
             </div>
 
         </div>
+        <br>
+        <div>
+            <a href="https://github.com/enzoftware/ninver/issues" target="_blank" data-toggle="tooltip" data-placement="top" title="Dudas? Problemas? Contactanos!" class="float-right btn btn--lg btn--red "><i class="fas fa-question" aria-hidden="true"></i></a>
+        </div>
 
 
     </div>
@@ -141,6 +146,7 @@
         crossorigin="anonymous"></script>
     <script>
         $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
             $('body').bootstrapMaterialDesign();
         });
     </script>
