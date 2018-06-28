@@ -304,6 +304,7 @@ function recalcularMetodoFrances() {
 
         if(cambio === true){
             if(sfmonth < 1) sfmonth = 0;
+            console.log(simonth+" "+interesmonth+" "+cuotamonth+" "+amortimonth+" "+sfmonth);
             $tds.eq(0).text(nmonth);
             $tds.eq(1).find('input').val(teamonth);
             $tds.eq(2).text(tepmonth.toFixed(7));
@@ -314,10 +315,9 @@ function recalcularMetodoFrances() {
             $tds.eq(7).text(amortimonth.toFixed(2));
             $tds.eq(8).text(sfmonth.toFixed(2));
 
-            cambio = false;
         }else {
             if(sfmonth < 1) sfmonth = 0;
-
+            console.log(simonth+" "+interesmonth+" "+cuotaactual+" "+amortimonth+" "+sfmonth);
             $tds.eq(0).text(nmonth);
             $tds.eq(1).find('input').val(teamonth);
             $tds.eq(2).text(tepmonth.toFixed(7));
