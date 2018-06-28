@@ -111,6 +111,7 @@ function getValuesIntermediate() {
     tea = $('#tea').val();
     frecuencia = $('#frecuencia').val();
     anos = $('#anos').val();
+    tir = $("#tir").val();
 
     switch (frecuencia) {
         case 'Diario':
@@ -213,7 +214,6 @@ function metodoFrancesPrimerCalculo(){
     var cuotasparaTIR = [];
     var cuota = parseFloat(calcularCuota(tep,nperiodos,prestamo)).toFixed(2);
     var montoInicial = parseFloat(prestamo).toFixed(2);
-    cuotasparaTIR.push(montoInicial*(-1));
 
     tea = parseFloat(tea).toFixed(2);
     tep = parseFloat(tep).toFixed(7);
@@ -226,15 +226,15 @@ function metodoFrancesPrimerCalculo(){
         if(i == nperiodos && saldoFinal < 1){
             saldoFinal = 0.0;
         }
-        
+
         addRow(i,tea_row,tep,selectPeriodoGracia,montoInicial,interes,cuota,amortizacion,saldoFinal);
         montoInicial = saldoFinal;
     }
-    $("#trea").text(calcularTREA(10,10,10,10));
+    $("#trea").text(calcularTREA(100,9,nperiodos/anos,5));
     $("#tcea").text(calcularTCEA(nperiodos/anos,tir));
-    $("#convexidad").text(calcularConvexidad(cuota,tir,montoInicial,nperiodos));
-    $("#duracion").text(calcularDuracion(nperiodos,cuota,tir,montoInicial));
-    $("#duracionmodif").text(calcularDuracionModificada(tir,cuota,montoInicial,nperiodos));
+    $("#convexidad").text(calcularConvexidad(cuota,tir,prestamo,nperiodos));
+    $("#duracion").text(calcularDuracion(nperiodos,cuota,tir,prestamo));
+    $("#duracionmodif").text(calcularDuracionModificada(tir,cuota,prestamo,nperiodos));
 }
 
 
@@ -341,7 +341,10 @@ function calcularTCEA(_k,_tir) {
 }
 
 function calcularTREA(_vf,_va,_p,_t) {
-    return (Math.pow(_vf / _va,_p / _t) - 1 ) * 100;
+    var b = _vf / _va;
+    var e = _p / _t;
+    console.log(b+" "+e);
+    return ( Math.pow(b ,e) - 1 ) * 100;
 }
 
 function calcularConvexidad(_cuota,_tir,_p,_n){
@@ -362,6 +365,11 @@ function calcularDuracion(_n,_cuota,_tir,_p){
 
 function calcularDuracionModificada(_tir,_cuota,_p,_n){
     var dur = calcularDuracion(_n,_cuota,_tir,_p);
-    return (-1/(1+_tir))*dur;
+    var dm = (-1/(1+_tir))*dur;
+    if(dm < 0){
+        return dm * -1
+    }else{
+        return dm;
+    }
 }
 
