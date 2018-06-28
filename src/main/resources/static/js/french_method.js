@@ -1,5 +1,4 @@
-
-
+var finance = new Finance();
 // CONSTANTES
 var ndiasano = 360;
 
@@ -21,6 +20,10 @@ var frecuenciaDias = 0;
 var tep = 0;
 var prestamo = 0;
 var nperiodos = 0;
+
+//datos finales
+
+var tir = 10.5;
 
 
 // EVENTOS DEL DOM
@@ -209,9 +212,10 @@ function addRow(_ind,_tea,_tep,_pg,_si,_int,_cuota,_amort,_sf){
 }
 
 function metodoFrancesPrimerCalculo(){
-
+    var cuotasparaTIR = [];
     var cuota = parseFloat(calcularCuota(tep,nperiodos,prestamo)).toFixed(2);
     var montoInicial = parseFloat(prestamo).toFixed(2);
+    cuotasparaTIR.push(montoInicial*(-1));
 
     tea = parseFloat(tea).toFixed(2);
     tep = parseFloat(tep).toFixed(7);
@@ -224,9 +228,11 @@ function metodoFrancesPrimerCalculo(){
         if(i == nperiodos && saldoFinal < 1){
             saldoFinal = 0.0;
         }
+        cuotasparaTIR.push(cuota);
         addRow(i,tea_row,tep,selectPeriodoGracia,montoInicial,interes,cuota,amortizacion,saldoFinal);
         montoInicial = saldoFinal;
     }
+    console.log(calcularTIR());
 }
 
 
@@ -323,3 +329,38 @@ function recalcularMetodoFrances() {
     });
 
 }
+
+function calcularTIR() {
+    var xd = [-500000, 200000, 300000, 200000];
+    return finance.IRR();
+}
+
+function calcularTCEA(_k,_tir) {
+    return Math.pow(1+_tir,_k)-1;
+}
+
+function calcularTREA() {
+
+}
+
+function calcularConvexidad(_cuota,_tir,_p,_n){
+    var conv_sum = 0;
+    for (var i = 0 ; i < _n ; i++){
+        conv_sum += ((_cuota/(Math.pow(1+_tir,i)))*(Math.pow(i,2)+i));
+    }
+    return (1/(_p*(Math.pow(1+_tir,2))))*conv_sum;
+}
+
+function calcularDuracion(_n,_cuota,_tir,_p){
+    var dura_sum = 0;
+    for (var i = 0 ; i < _n; i++){
+        dura_sum += ((i*_cuota)/(Math.pow(1+_tir,i)));
+    }
+    return dura_sum / _p;
+}
+
+function calcularDuracionModificada(_tir,_cuota,_p,_n){
+    var dur = calcularDuracion(_n,_cuota,_tir,_p);
+    return (-1/(1+_tir))*dur;
+}
+
