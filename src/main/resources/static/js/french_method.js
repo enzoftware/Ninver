@@ -25,7 +25,6 @@ var nperiodos = 0;
 
 var tir = 10.5;
 
-
 // EVENTOS DEL DOM
 
 $('#calcular').on('click', function () {
@@ -45,7 +44,6 @@ $('#calcular').on('click', function () {
     $("#reload").attr('disabled',false);
 
 });
-
 
 $("#genpdf").click(function() {
 
@@ -228,11 +226,15 @@ function metodoFrancesPrimerCalculo(){
         if(i == nperiodos && saldoFinal < 1){
             saldoFinal = 0.0;
         }
-        cuotasparaTIR.push(cuota);
+        
         addRow(i,tea_row,tep,selectPeriodoGracia,montoInicial,interes,cuota,amortizacion,saldoFinal);
         montoInicial = saldoFinal;
     }
-    console.log(calcularTIR());
+    $("#trea").text(calcularTREA(10,10,10,10));
+    $("#tcea").text(calcularTCEA(nperiodos/anos,tir));
+    $("#convexidad").text(calcularConvexidad(cuota,tir,montoInicial,nperiodos));
+    $("#duracion").text(calcularDuracion(nperiodos,cuota,tir,montoInicial));
+    $("#duracionmodif").text(calcularDuracionModificada(tir,cuota,montoInicial,nperiodos));
 }
 
 
@@ -331,16 +333,15 @@ function recalcularMetodoFrances() {
 }
 
 function calcularTIR() {
-    var xd = [-500000, 200000, 300000, 200000];
-    return finance.IRR();
+    return finance.IRR(prestamo*-1);
 }
 
 function calcularTCEA(_k,_tir) {
     return Math.pow(1+_tir,_k)-1;
 }
 
-function calcularTREA() {
-
+function calcularTREA(_vf,_va,_p,_t) {
+    return (Math.pow(_vf / _va,_p / _t) - 1 ) * 100;
 }
 
 function calcularConvexidad(_cuota,_tir,_p,_n){
